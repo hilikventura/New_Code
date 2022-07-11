@@ -1,17 +1,21 @@
 pipeline {
-  agent {
-    node {
-      label 'node1'
-    }
+    agent any
 
-  }
-  stages {
-    stage('') {
-      steps {
-        sh 'env'
-        sh 'echo "after env"'
-      }
+    stages {
+        stage('Build') {
+            steps {
+                echo 'Building..'
+            }
+        }
+        stage('Test') {
+            steps {
+                echo 'Testing..'
+            }
+        }
+        stage('Deploy') {
+            steps {
+                echo 'Deploying....'
+            }
+        }
     }
-
-  }
 }
