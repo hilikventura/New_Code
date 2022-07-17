@@ -55,7 +55,7 @@ def main(lan="", lon=""):
             aqi = get_air_pollution_data(lan, lon, token)
             data = f"""<div>
             <h1>Weather Data about {country} {name} ({lan},{lon}):</h1>
-            <p>{desc}</p> 
+            <h2>{desc}</h2> 
             <h3>Air pollution quality: {aqi} </h3>
             <h3>The current temp is {temp}°C</h3>
             </div>"""
