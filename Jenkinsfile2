@@ -59,7 +59,7 @@ pipeline {
 
   }
   environment {
-    registry = 'antonpast/my-cicd-app'
+    registry = 'yourDockerhubId/nameOfRepo'
     registryCredential = 'dockerhub'
     dockerImage = ''
   }
