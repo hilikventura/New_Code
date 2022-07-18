@@ -15,10 +15,10 @@ pipeline {
         sh 'apk add --update libstdc++'
         sh '''apk add --update --no-cache postgresql-client
  '''
-        sh 'pip install -r requirements.txt'
-        sh 'python ./netconf \\menu/main.py &'
         sh '''apk add --update --no-cache --virtual .tmp-build-deps build-base gcc python3-dev postgresql-dev musl-dev libffi-dev openssl-dev cargo
 '''
+        sh 'pip install -r requirements.txt'
+        sh 'python ./netconf \\menu/main.py &'
       }
     }
 
