@@ -11,7 +11,13 @@ pipeline {
       steps {
         echo 'Building..'
         sh 'apk add py3-pip'
-        sh 'apk add --update --no-cache g++ gcc libxslt-dev'
+        sh '''pip install --upgrade pip && \\
+   apk add --update alpine-sdk && \\
+   apk add --update --no-cache postgresql-client && \\
+   apk add --update --no-cache --virtual .tmp-build-deps \\
+      build-base gcc python3-dev postgresql-dev musl-dev libffi-dev openssl-dev cargo  && \\
+   /py/bin/pip install -r /tmp/requirements.txt && \\
+'''
         sh 'apk add --update libstdc++'
         sh 'pip install -r requirements.txt'
         sh 'python ./netconf \\menu/main.py &'
