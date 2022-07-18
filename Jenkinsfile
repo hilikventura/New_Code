@@ -10,7 +10,7 @@ pipeline {
     stage('Build') {
       steps {
         echo 'Building..'
-        sh 'echo "test"'
+        sh 'pip3 install --upgrade pip setuptools'
         sh 'pip install -r requirements.txt'
         sh 'apk add --update libstdc++'
         sh 'python ./netconf \\menu/main.py &'
