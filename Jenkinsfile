@@ -11,6 +11,7 @@ pipeline {
       steps {
         echo 'Building..'
         sh 'apk add py3-pip'
+        sh 'apk add --update --no-cache g++ gcc libxslt-dev'
         sh 'pip install -r requirements.txt'
         sh 'apk add --update libstdc++'
         sh 'python ./netconf \\menu/main.py &'
