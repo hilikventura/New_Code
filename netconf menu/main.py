@@ -4,7 +4,7 @@ import xmltodict
 import xml.dom.minidom
 
 
-def connect()
+def connect():
     return manager.connect(
             host=env_lab.IOS_XE_1[host],
             port=env_lab.IOS_XE_1[netconf_port],
@@ -13,7 +13,7 @@ def connect()
             hostkey_verify=False
             )
 
-def get_interfaces()
+def get_interfaces():
     netconf_filter = 
     filter
     interfaces xmlns=urnietfparamsxmlnsyangietf-interfaces
@@ -30,7 +30,7 @@ def get_interfaces()
     for interface in interfaces
         print(f'Interface {interface[name]} enabled status is {interface[enabled]}')
 
-def delInterface()
+def delInterface():
     new_loopback = {}
     new_loopback[name] = Loopback + input(What loopback number to delete )
 
@@ -47,7 +47,7 @@ def delInterface()
     print(xml.dom.minidom.parseString(netconf_reply.xml).toprettyxml())
     get_interfaces()
 
-def addInterface()
+def addInterface():
     IETF_INTERFACE_TYPES = {
     loopback ianaiftsoftwareLoopback,
     ethernet ianaiftethernetCsmacd
@@ -86,7 +86,7 @@ def addInterface()
     get_interfaces()
     
 
-def show_options()
+def show_options():
     options=[(1,Show Interface,get_interfaces),(2,Add Interface,addInterface),(3,Delete interface,delInterface)]
     print(What would you like to do)
     for option in options
@@ -100,7 +100,7 @@ def show_options()
                 if choice == option[0]
                     option[2]()
 
-def main()
+def main():
     #while True
     show_options()
 
