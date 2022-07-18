@@ -1,9 +1,18 @@
 pipeline {
-  agent any
+  agent {
+    docker {
+      image 'python:alpine3.7'
+      args '-p 5000:5000'
+    }
+
+  }
   stages {
     stage('Build') {
       steps {
         echo 'Building..'
+        sh 'pip install -r requirements.txt'
+        sh 'apk add --update libstdc++'
+        sh 'python ./netconf \\menu/main.py &'
       }
     }
 
@@ -19,5 +28,10 @@ pipeline {
       }
     }
 
+  }
+  environment {
+    registry = 'antonpast/netconf'
+    registryCredential = 'dockerhub'
+    dockerImage = ''
   }
 }
