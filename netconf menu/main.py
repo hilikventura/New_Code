@@ -2,6 +2,9 @@ import env_lab  # noqa
 from ncclient import manager
 import xmltodict
 import xml.dom.minidom
+from flask import Flask
+web = Flask(__name__)
+
 
 
 def connect():
@@ -85,24 +88,14 @@ def addInterface():
     print(xml.dom.minidom.parseString(netconf_reply.xml).toprettyxml())
     get_interfaces()
     
-
+@web.route("/")
 def show_options():
-    options=[(1,"Show Interface",get_interfaces),(2,"Add Interface",addInterface),(3,"Delete interface",delInterface)]
-    print("What would you like to do:")
+    options=[(1,"Show Interface=get",get_interfaces),(2,"Add Interface=add",addInterface),(3,"Delete interface",delInterface)]
+    show="<h1>What would you like to do:</h1>"
     for option in options:
-        print(f"({option[0]}) {option[1]}")
-    choice=input()
+        show+=f"<h2>({option[0]}) go to ---> {option[1]}</h2>"
+    return show
 
-    if len(choice)==1 and choice.isdigit():
-        if 1<=int(choice)<=len(options):
-            choice=int(choice)
-            for option in options:
-                if choice == option[0]:
-                    option[2]()
+if __name__ == "__main__":
 
-def main():
-    #while True:
-    show_options()
-
-
-main()
+    web.run(host="0.0.0.0", port=8000)
