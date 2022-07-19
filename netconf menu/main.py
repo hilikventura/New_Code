@@ -16,6 +16,7 @@ def connect():
             hostkey_verify=False
             )
 
+@web.route("/get")
 def get_interfaces():
     netconf_filter = """
     <filter>
@@ -28,11 +29,15 @@ def get_interfaces():
 
     netconf_data = xmltodict.parse(netconf_reply.xml)["rpc-reply"]["data"]
     interfaces = netconf_data["interfaces"]["interface"]
-    print()
-    print("The interface status of the device is: ")
+    
+    show="<h1>The interface status of the device is: </h1> <ul>"
     for interface in interfaces:
-        print(f'Interface {interface["name"]} enabled status is {interface["enabled"]}')
+        show+=f'<li>Interface {interface["name"]} enabled status is {interface["enabled"]}</li>'
+    show+="</ul>"
+    print(show)
+    return show
 
+@web.route("/dell")
 def delInterface():
     new_loopback = {}
     new_loopback["name"] = "Loopback" + input("What loopback number to delete? ")
@@ -50,6 +55,7 @@ def delInterface():
     print(xml.dom.minidom.parseString(netconf_reply.xml).toprettyxml())
     get_interfaces()
 
+@web.route("/add")
 def addInterface():
     IETF_INTERFACE_TYPES = {
     "loopback": "ianaift:softwareLoopback",
@@ -87,7 +93,7 @@ def addInterface():
     print("Here is the raw XML data returned from the device.\n")
     print(xml.dom.minidom.parseString(netconf_reply.xml).toprettyxml())
     get_interfaces()
-    
+
 @web.route("/")
 def show_options():
     options=[(1,"Show Interface=get",get_interfaces),(2,"Add Interface=add",addInterface),(3,"Delete interface",delInterface)]
