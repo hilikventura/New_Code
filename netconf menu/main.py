@@ -37,11 +37,10 @@ def get_interfaces():
     show += "</ul>"
     return show
 
-
-@web.route("/del/<num>")
+@web.route("/del/<int:num>")
 def delInterface(num):
     new_loopback = {}
-    new_loopback["name"] = "Loopback" + num
+    new_loopback["name"] = "Loopback" + str(num)
 
     netconf_data = f"""
     <config>
