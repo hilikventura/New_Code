@@ -1,32 +1,3 @@
-Skip to content
-Search or jump to…
-Pull requests
-Issues
-Marketplace
-Explore
- 
-@hilikventura 
-MargaretP12
-/
-4students
-Public
-forked from AntonPas/4students
-Code
-Pull requests
-Actions
-Projects
-Wiki
-Security
-Insights
-4students/netconf menu/main.py /
-@MargaretP12
-MargaretP12 Update main.py
-Latest commit 1a8fc56 7 days ago
- History
- 2 contributors
-@AntonPas@MargaretP12
-111 lines (91 sloc)  3.6 KB
-
 import env_lab  # noqa
 from ncclient import manager
 import xmltodict
@@ -138,18 +109,3 @@ def show_options():
 
 if __name__ == "__main__":
     web.run(host="0.0.0.0", port=8080)
-Footer
-© 2022 GitHub, Inc.
-Footer navigation
-Terms
-Privacy
-Security
-Status
-Docs
-Contact GitHub
-Pricing
-API
-Training
-Blog
-About
-You have no unread notifications
